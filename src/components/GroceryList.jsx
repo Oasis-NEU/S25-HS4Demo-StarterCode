@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import GroceryItem from './GroceryItem.jsx';
-import AddItemForm from './AddItemForm.jsx';
+import { useState } from "react";
+import GroceryItem from "./GroceryItem.jsx";
+import AddItemForm from "./AddItemForm.jsx";
 
 function GroceryList() {
   const [items, setItems] = useState([]);
 
   const addItem = (name) => {
-    if (name.trim()) { 
+    if (name.trim()) {
       setItems([...items, { id: items.length, name }]);
     }
   };
@@ -19,15 +19,15 @@ function GroceryList() {
     <div>
       <h2>Grocery List</h2>
       <AddItemForm addItem={addItem} />
-      <ul>
-        {items.map((item) => (
-          <GroceryItem
-            key={item.id}
-            item={item}
-            deleteItem={deleteItem}
-          />
-        ))}
-      </ul>
+      {items.length === 0 ? (
+        <p>No items added to grocery list!</p>
+      ) : (
+        <ul>
+          {items.map((item) => (
+            <GroceryItem key={item.id} item={item} deleteItem={deleteItem} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
